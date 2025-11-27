@@ -1,6 +1,5 @@
 import win32clipboard
 import pyperclip
-import numpy as np
 
 win32clipboard.OpenClipboard()
 raw_input = win32clipboard.GetClipboardData()
@@ -20,8 +19,9 @@ for pitch in pitches:
     new_pitch = "<li>" + "<svg" + remove_fluff(pitch, ["</ol>", "<li>"])
     pitch_list.append(new_pitch)
 
-pitch_list = (np.unique(pitch_list))
-return_pitch = pitch_list
+# Convert list into dictionary, then back to remove duplicates and keep order
+pitch_dict = dict.fromkeys(pitch_list)
+return_pitch = list(pitch_dict)
 
 if len(return_pitch) == 1:
     return_pitch = "".join(return_pitch)
